@@ -4,25 +4,26 @@ const request = require('request')
 
 const axios = require('axios')
 
-const FormData = require('form-data')
-
 const bodyParser = require('body-parser')
 
 const app = express();
 
 const fs = require('fs');
-const { json } = require('body-parser')
-
 
 // Create appliation/json parser
 var JsonParser = bodyParser.json();
 
 // Create application/x-www-form-urlencoded parser
-var UrlEncodedParser = bodyParser.urlencoded({ extended: false });
 
-const host = '0.0.0.0';
+
+const host = '143.244.156.170';
 const port =  process.env.PORT || 5000;
 
+
+
+app.listen(port, host, function () {            //server starts listening for any attempts from a client to connect at port: {port}
+  console.log(`Now listening on port ${port}`); 
+});
 
 
 
@@ -36,19 +37,19 @@ const expenses = [
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true, parameterLimit: 1000000}));
 
-app.get('/', (req, res) => {
+app.get('https://143.244.156.170/', (req, res) => {
     res.status(200).send({
         message: 'Welcome to the Devbase API Service',
     })
 });
 
 
-app.get('/api/expenses', (req, res) => {
+app.get('https://143.244.156.170/api/expenses', (req, res) => {
     res.send(expenses);
 });
 
 
-app.post('/api/expenses', JsonParser, function (req, res) {
+app.post('https://143.244.156.170/api/expenses', JsonParser, function (req, res) {
     const expense = {
         name: req.body.name,
         amount: parseInt(req.body.amount),
@@ -88,7 +89,7 @@ const getData = async () => {
 
 var config = {
   method: 'get',
-  url: 'http://143.244.156.170/api/expenses',
+  url: 'https://143.244.156.170/api/expenses',
   headers: { }
 };
 
@@ -165,6 +166,3 @@ if (process.env.NODE_ENV !== 'production') {
 
 
 
-app.listen(port, host, function () {            //server starts listening for any attempts from a client to connect at port: {port}
-    console.log(`Now listening on port ${port}`); 
-});
