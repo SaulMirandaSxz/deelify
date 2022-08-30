@@ -20,8 +20,8 @@ var JsonParser = bodyParser.json();
 // Create application/x-www-form-urlencoded parser
 var UrlEncodedParser = bodyParser.urlencoded({ extended: false });
 
-const host = '143.244.156.170';
-const port =  process.env.PORT;
+const host = '0.0.0.0';
+const port =  process.env.PORT || 5000;
 
 
 
@@ -48,16 +48,6 @@ app.get('/api/expenses', (req, res) => {
 });
 
 
-app.post('/api/expenses', JsonParser, function (req, res) {
-    const expense = {
-        name: req.body.name,
-        amount: parseInt(req.body.amount),
-        file: req.body.file,
-    }
-    
-    expenses.push(expense);
-    res.send(expense);
-});
 
 
 /*
@@ -117,6 +107,9 @@ axios.get('https://i.imgur.com/8uJcFxW.jpg', { responseType: "stream" })
 
 */
 
+
+
+
 const axiosRequest1 = async () => {
 try {
   const resp = await axios ({
@@ -147,13 +140,8 @@ try {
     
   }
 
-  
 
-  axiosRequest1()
-  axiosRequest2()
-
-setTimeout(() => {
-  
+const formData = async () => {
 var options = {
   'method': 'POST',
   'url': 'https://api-gateway-demo.deel.network/rest/v1/invoice-adjustments',
@@ -186,7 +174,21 @@ request(options, function (error, response, body) {
 
 });
 
-}, 1000);
+}
+
+
+app.post('/api/expenses', JsonParser, function (req, res) {
+  const expense = {
+      name: req.body.name,
+      amount: parseInt(req.body.amount),
+      file: req.body.file,
+  }
+  expenses.push(expense);
+
+  res.send(  axiosRequest1(), axiosRequest2(), formData()  );
+});
+
+
 
 
 
