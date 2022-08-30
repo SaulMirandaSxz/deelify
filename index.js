@@ -4,26 +4,25 @@ const request = require('request')
 
 const axios = require('axios')
 
+const FormData = require('form-data')
+
 const bodyParser = require('body-parser')
 
 const app = express();
 
 const fs = require('fs');
+const { json } = require('body-parser')
+
 
 // Create appliation/json parser
 var JsonParser = bodyParser.json();
 
 // Create application/x-www-form-urlencoded parser
+var UrlEncodedParser = bodyParser.urlencoded({ extended: false });
 
-
-const host = '143.244.156.170';
+const host = '0.0.0.0';
 const port =  process.env.PORT || 5000;
 
-
-
-app.listen(port, host, function () {            //server starts listening for any attempts from a client to connect at port: {port}
-  console.log(`Now listening on port ${port}`); 
-});
 
 
 
@@ -37,19 +36,19 @@ const expenses = [
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true, parameterLimit: 1000000}));
 
-app.get('https://143.244.156.170/', (req, res) => {
+app.get('/', (req, res) => {
     res.status(200).send({
         message: 'Welcome to the Devbase API Service',
     })
 });
 
 
-app.get('https://143.244.156.170/api/expenses', (req, res) => {
+app.get('/api/expenses', (req, res) => {
     res.send(expenses);
 });
 
 
-app.post('https://143.244.156.170/api/expenses', JsonParser, function (req, res) {
+app.post('/api/expenses', JsonParser, function (req, res) {
     const expense = {
         name: req.body.name,
         amount: parseInt(req.body.amount),
@@ -83,13 +82,13 @@ return response2
 }  
 
 */
-
+/*
 
 const getData = async () => { 
 
 var config = {
   method: 'get',
-  url: 'https://143.244.156.170/api/expenses',
+  url: 'http://143.244.156.170/api/expenses',
   headers: { }
 };
 
@@ -100,10 +99,8 @@ axios(config)
     return jsonData
 })
 
-}
 
-var URLpath = JSON.stringify(getData())
-axios.get(URLpath, { responseType: "stream" })
+axios.get('https://i.imgur.com/8uJcFxW.jpg', { responseType: "stream" })
     .then(response => {
       // Saving file to working directory  
       var responseData = response.data.pipe(fs.createWriteStream("receipt.png"))
@@ -115,9 +112,48 @@ axios.get(URLpath, { responseType: "stream" })
       console.log(error)
     })
 
+  }
 
-/*
 
+*/
+
+const axiosRequest1 = async () => {
+try {
+  const resp = await axios ({
+    method: 'GET',
+    url: 'http://143.244.156.170/api/expenses',
+  })
+        const a = await JSON.stringify(resp.data[resp.data.length - 1].file);
+        const aString = a.replace("[", "").replace("\"", "").replace("]", "").replaceAll('"', '')
+        console.log(aString)
+        return aString;
+      } catch (error) {
+        console.error(error);
+      }
+}
+
+
+  const axiosRequest2 = async () => {
+  try {
+      const resp = await axios.get( await axiosRequest1(), {responseType: "stream"})
+          const b = await resp.data.pipe(fs.createWriteStream( 'file.pdf' ));
+         console.log(b)
+          return b;
+  
+  
+  } catch (error) {
+    console.error(error);
+  }
+    
+  }
+
+  
+
+  axiosRequest1()
+  axiosRequest2()
+
+setTimeout(() => {
+  
 var options = {
   'method': 'POST',
   'url': 'https://api-gateway-demo.deel.network/rest/v1/invoice-adjustments',
@@ -126,16 +162,16 @@ var options = {
   },
   json:true,
   formData: {
-    'contract_id': '39eeg4q',
+    'contract_id': 'myxvx4e',
     'date_submitted': '2022-08-22',
     'type': 'expense',
     'amount': 2000,
     'description': 'Catnip4',
     'file': {
      // 'value': fs.createReadStream('/Users/saxs_/Documents/GitHub/NodeDevbase/images/V44ZdDK.png'), 
-      'value': fs.createReadStream('jsonEncodedURL'),
+      'value': fs.createReadStream('file.pdf'),
       'options': {
-        'filename': 'jsonEncodedURL',
+        'filename': 'file.pdf',
         'contentType': null
       }
     }
@@ -145,15 +181,12 @@ request(options, function (error, response, body) {
   if (error) throw new Error(error);
   console.log(response.body);
   if (response.body = true ) {
-    fs.unlinkSync('jsonEncodedURL');
+    fs.unlinkSync('file.pdf');
   }
 
 });
 
-
-
-*/
-
+}, 1000);
 
 
 
@@ -166,3 +199,6 @@ if (process.env.NODE_ENV !== 'production') {
 
 
 
+app.listen(port, host, function () {            //server starts listening for any attempts from a client to connect at port: {port}
+    console.log(`Now listening on port ${port}`); 
+});
