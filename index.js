@@ -20,7 +20,7 @@ var JsonParser = bodyParser.json();
 // Create application/x-www-form-urlencoded parser
 var UrlEncodedParser = bodyParser.urlencoded({ extended: false });
 
-const host = '0.0.0.0';
+const host = '143.244.156.170';
 const port =  process.env.PORT || 5000;
 
 
