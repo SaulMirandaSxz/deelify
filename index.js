@@ -21,7 +21,7 @@ var JsonParser = bodyParser.json();
 var UrlEncodedParser = bodyParser.urlencoded({ extended: false });
 
 const host = '143.244.156.170';
-const port =  process.env.PORT || 5000;
+const port =  process.env.PORT;
 
 
 
