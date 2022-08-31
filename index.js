@@ -42,7 +42,7 @@ app.get('/', (req, res) => {
     })
 });
 
-
+// GET All expenses
 app.get('/api/expenses', (req, res) => {
     res.send(expenses);
 });
@@ -109,6 +109,7 @@ axios.get('https://i.imgur.com/8uJcFxW.jpg', { responseType: "stream" })
 
 
 
+// Request last Expense file URL submited and storage it into variable
 
 const axiosRequest1 = async () => {
 try {
@@ -126,6 +127,7 @@ try {
 }
 
 
+// Use Expense file URL and upload it temporary into the server
   const axiosRequest2 = async () => {
   try {
       const resp = await axios.get( await axiosRequest1(), {responseType: "stream"})
@@ -140,7 +142,8 @@ try {
     
   }
 
-
+// Send form data to Let's Deel including previous file 
+  
 const formData = async () => {
 var options = {
   'method': 'POST',
@@ -165,6 +168,8 @@ var options = {
     }
   }
 }
+
+// Delete file from server 
 request(options, function (error, response, body) {
   if (error) throw new Error(error);
   console.log(response.body);
@@ -176,6 +181,7 @@ request(options, function (error, response, body) {
 
 }
 
+// Request post Method to add new expense from airtable and start functions. 
 
 app.post('/api/expenses', JsonParser, function (req, res) {
   const expense = {
@@ -192,15 +198,10 @@ app.post('/api/expenses', JsonParser, function (req, res) {
 
 
 
-
+// Start Server
 if (process.env.NODE_ENV !== 'production') {
-
         require('longjohn')
-
 }
-
-
-
 app.listen(port, host, function () {            //server starts listening for any attempts from a client to connect at port: {port}
     console.log(`Now listening on port ${port}`); 
 });
