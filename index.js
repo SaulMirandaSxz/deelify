@@ -48,67 +48,6 @@ app.get('/api/expenses', (req, res) => {
 });
 
 
-
-
-/*
-async function axiosURL() {
-
-// Remove the URL Protocol (https:// & http://) using regex.
-  
-
-const response2 = axios.get('https://i.imgur.com/8uJcFxW.jpg', { responseType: 'stream' });  
-
-return response2
-
-.then( result  => 
-    {
-      console.log(result.data.responseUrl);
-      res = result; 
-      return result 
-      }
-    )
-    .catch(err => console.error(err));
-
-}  
-
-*/
-/*
-
-const getData = async () => { 
-
-var config = {
-  method: 'get',
-  url: 'http://143.244.156.170/api/expenses',
-  headers: { }
-};
-
-axios(config)
-.then((response) => {
-    var jsonData = JSON.stringify(response.data[response.data.length - 1].file.join(' '))
-    console.log(jsonData)
-    return jsonData
-})
-
-
-axios.get('https://i.imgur.com/8uJcFxW.jpg', { responseType: "stream" })
-    .then(response => {
-      // Saving file to working directory  
-      var responseData = response.data.pipe(fs.createWriteStream("receipt.png"))
-      responseData
-      console.log(responseData)
-
-    })
-    .catch(error => {
-      console.log(error)
-    })
-
-  }
-
-
-*/
-
-
-
 // Request last Expense file URL submited and storage it into variable
 
 const axiosRequest1 = async () => {
