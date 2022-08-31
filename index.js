@@ -24,9 +24,7 @@ const host = '143.244.156.170';
 const port =  process.env.PORT || 3000;
 
 
-
-
-
+// Expense list sample
 const expenses = [
     { name: "string", amount: 1500, file: "string.jpg" },
     { name: "string1", amount: 1500, file: "string1.jpg"} ];
@@ -81,6 +79,7 @@ try {
     
   }
 
+  
 // Send form data to Let's Deel including previous file 
   
 const formData = async () => {
