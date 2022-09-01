@@ -12,8 +12,11 @@ app.use(bodyParser.urlencoded({ extended: true, limit: '50mb', parameterLimit: 1
 // Routes
 app.post('/api/expenses', async (req, res) => {
   const expense = {
+    contract_id: req.body.contractID,
     name: req.body.name,
+    date: req.body.date,
     amount: parseInt(req.body.amount, 10),
+    description: req.body.description,
     file: req.body.file[0]
   }
 
@@ -25,10 +28,10 @@ app.post('/api/expenses', async (req, res) => {
     'https://api-gateway-demo.deel.network/rest/v1/invoice-adjustments', 
     {
       contract_id: 'myxvx4e',
-      date_submitted: '2022-08-22',
+      date_submitted: expense.date,
       type: 'expense',
-      amount: 2000,
-      description: 'Mariano123',
+      amount: expense.amount,
+      description: expense.description,
       file: fileResponse.data
     },
     {
