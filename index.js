@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const axios = require('axios')
+const morgan = require('morgan')
 const { z } = require('zod')
 
 // App
