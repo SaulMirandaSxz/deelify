@@ -13,8 +13,8 @@ app.use(bodyParser.urlencoded({ extended: true, limit: '50mb', parameterLimit: 1
 app.post('/api/expenses', async (req, res) => {
   const expense = {
     contract_id: req.body.contractID,
-    name: req.body.name,
     date: req.body.date,
+    name: req.body.name,
     amount: parseInt(req.body.amount, 10),
     description: req.body.description,
     file: req.body.file[0]
