@@ -1,7 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const axios = require('axios')
 const morgan = require('morgan')
+const axios = require('axios')
 const { z } = require('zod')
 
 // App
@@ -36,7 +36,7 @@ app.post('/api/expenses', async (req, res) => {
   }
 
   try {
-    const fileResponse = await axios.get(expense.file, {
+    var fileResponse = await axios.get(expense.file, {
       responseType: 'stream'
     })
   } catch (e) {
@@ -85,7 +85,7 @@ app.post('/api/expenses', async (req, res) => {
 })
 
 // Listen
-const port = process.env.PORT
+const port = process.env.PORT || 3000
 app.listen(port, () => 
   console.log(`Listening on port ${port}...`)
 )
