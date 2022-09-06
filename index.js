@@ -16,7 +16,9 @@ app.post('/api/expenses', async (req, res) => {
     amount: parseInt(req.body.amount, 10),
     file: req.body.file[0]
   }
-
+  const response = await axios.post('http://localhost:3000/api/expenses', expense)
+  res.send(response.data)
+  
   const fileResponse = await axios.get(expense.file, {
     responseType: 'stream'
   })
