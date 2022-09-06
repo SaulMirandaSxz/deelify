@@ -16,6 +16,12 @@ app.post('/api/expenses', async (req, res) => {
     amount: parseInt(req.body.amount, 10),
     file: req.body.file[0]
   }
+  
+   // if req.body is empty, return 400
+  if (!expense.name || !expense.amount || !expense.file) {
+    return res.status(400).send('Bad Request')
+  }
+  
   const response = await axios.post('http://localhost:3000/api/expenses', expense)
   res.send(response.data)
   
