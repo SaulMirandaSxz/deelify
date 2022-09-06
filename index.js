@@ -19,7 +19,7 @@ app.post('/api/expenses', async (req, res) => {
     description: req.body.description,
     file: req.body.file[0]
   }
-
+  res.json(expense)
 
   const fileResponse = await axios.get(expense.file, {
     responseType: 'stream'
