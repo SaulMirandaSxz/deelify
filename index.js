@@ -12,11 +12,8 @@ app.use(bodyParser.urlencoded({ extended: true, limit: '50mb', parameterLimit: 1
 // Routes
 app.post('/api/expenses', async (req, res) => {
   const expense = {
-    contract_id: req.body.contractID,
-    date: req.body.date,
     name: req.body.name,
     amount: parseInt(req.body.amount, 10),
-    description: req.body.description,
     file: req.body.file[0]
   }
 
@@ -28,10 +25,10 @@ app.post('/api/expenses', async (req, res) => {
     'https://api-gateway-demo.deel.network/rest/v1/invoice-adjustments', 
     {
       contract_id: 'myxvx4e',
-      date_submitted: expense.date,
+      date_submitted: '2022-08-22',
       type: 'expense',
-      amount: expense.amount,
-      description: expense.description,
+      amount: 2000,
+      description: 'Mariano123',
       file: fileResponse.data
     },
     {
@@ -56,7 +53,7 @@ app.post('/api/expenses', async (req, res) => {
 })
 
 // Listen
-const port = process.env.PORT
+const port = process.env.PORT || 3000
 app.listen(port, () => 
   console.log(`Listening on port ${port}...`)
 )
