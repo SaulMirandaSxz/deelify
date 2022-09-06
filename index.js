@@ -19,13 +19,7 @@ app.post('/api/expenses', async (req, res) => {
     description: req.body.description,
     file: req.body.file[0]
   }
-  // Response from express server
-  res.send(expense)
-})
-  // error due to missing fields in the request
-  .catch(err => {
-    res.status(400).send(err)
-  })
+
 
   const fileResponse = await axios.get(expense.file, {
     responseType: 'stream'
