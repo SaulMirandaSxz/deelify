@@ -51,7 +51,7 @@ app.post('/api/expenses', async (req, res) => {
       'https://api-gateway-demo.deel.network/rest/v1/invoice-adjustments', 
       {
         contract_id: 'myxvx4e',
-        date_submitted: '2021-09-11',
+        date_submitted: '2022-05-11',
         type: 'expense',
         amount: 10000,
         description: 'WEDNESSDAY TEST',
