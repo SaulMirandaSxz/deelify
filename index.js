@@ -54,7 +54,7 @@ app.post('/api/expenses', async (req, res) => {
         date_submitted: '2021-09-11',
         type: 'expense',
         amount: 10000,
-        description: 'Mariano123',
+        description: 'WEDNESSDAY TEST',
         file: fileResponse.data
       },
       {
