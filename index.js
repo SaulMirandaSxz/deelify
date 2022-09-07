@@ -16,6 +16,7 @@ app.use(morgan('tiny'))
 app.post('/api/expenses', async (req, res) => {
   const { success, data } = z.object({
     name: z.string(),
+    date: z.string(),
     amount: z.number(),
     file: z.array(
       z.string().url()
@@ -31,6 +32,7 @@ app.post('/api/expenses', async (req, res) => {
 
   const expense = {
     name: data.name,
+    date: data.date,
     amount: data.amount,
     file: data.file[0]
   }
@@ -51,7 +53,7 @@ app.post('/api/expenses', async (req, res) => {
       'https://api-gateway-demo.deel.network/rest/v1/invoice-adjustments', 
       {
         contract_id: 'myxvx4e',
-        date_submitted: expense.file,
+        date_submitted: expense.date,
         type: 'expense',
         amount: 10000,
         description: 'WEDNESSDAY TEST',
