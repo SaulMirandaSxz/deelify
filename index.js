@@ -15,9 +15,11 @@ app.use(morgan('tiny'))
 // Routes
 app.post('/api/expenses', async (req, res) => {
   const { success, data } = z.object({
-    name: z.string(),
+    contract_id: z.string(),
     date: z.string(),
+    type: z.string(),
     amount: z.number(),
+    description: z.string(),
     file: z.array(
       z.string().url()
     ).nonempty(),
@@ -31,9 +33,11 @@ app.post('/api/expenses', async (req, res) => {
   }
 
   const expense = {
-    name: data.name,
+    contract_id: data.contract_id,
     date: data.date,
+    type: data.type,
     amount: data.amount,
+    description: data.description,
     file: data.file[0]
   }
 
@@ -52,11 +56,11 @@ app.post('/api/expenses', async (req, res) => {
     const uploadResponse = await axios.post(
       'https://api-gateway-demo.deel.network/rest/v1/invoice-adjustments', 
       {
-        contract_id: 'myxvx4e',
+        contract_id: expense.contract_id,
         date_submitted: expense.date,
-        type: 'expense',
-        amount: 10000,
-        description: 'WEDNESSDAY TEST',
+        type: expense.type,
+        amount: expense.amount,
+        description: expense.description,
         file: fileResponse.data
       },
       {
