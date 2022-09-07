@@ -53,7 +53,7 @@ app.post('/api/expenses', async (req, res) => {
         contract_id: 'myxvx4e',
         date_submitted: '2021-09-11',
         type: 'expense',
-        amount: 2000,
+        amount: 10000,
         description: 'Mariano123',
         file: fileResponse.data
       },
