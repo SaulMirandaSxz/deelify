@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
 dotenv.config()
-const authKey = process.env.AUTH_ACCESS_KEY
+const authKey = process.env.API_TOKEN
 
 const express = require('express')
 const bodyParser = require('body-parser')
