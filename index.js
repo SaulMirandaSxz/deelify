@@ -58,7 +58,7 @@ app.post('/api/expenses', async (req, res) => {
 
   try {
     const uploadResponse = await axios.post(
-      'https://api-gateway-demo.deel.network/rest/v1/invoice-adjustments', 
+      'https://api.letsdeel.com/rest/v1/invoice-adjustments', 
       {
         contract_id: expense.contract_id,
         date_submitted: expense.date,
